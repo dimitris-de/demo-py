@@ -17,11 +17,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive test suite with 27 tests achieving 96.39% coverage
 - Airflow DAG unit tests without database dependencies
 - Docker and docker-compose configuration
-- GitLab CI/CD pipeline with 4 stages (lint → test → build → deploy)
+- GitLab CI/CD pipeline with 5 stages (lint → changelog → test → build → deploy)
 - Multi-framework template generator system
 - Code quality tools: black, flake8, mypy
 - Comprehensive documentation (README, COPILOT_INSTRUCTIONS)
 - Security review documentation
+- CHANGELOG.md with Keep a Changelog format
+- Automated changelog validation in GitLab CI
+- Utility scripts directory (`scripts/`) for maintainability
+- `scripts/check_changelog.sh` - Standalone changelog validation script with colored output
+
+### Changed
+
+- Refactored changelog validation from inline GitLab CI script to dedicated bash script
+- Improved GitLab CI configuration readability (now uses external scripts)
+- Enhanced error messages with actionable suggestions and color coding
 
 ### Changed
 
