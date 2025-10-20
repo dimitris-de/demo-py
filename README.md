@@ -1,5 +1,7 @@
 # Demo Python Project
 
+[![Coverage](https://img.shields.io/badge/coverage-check%20CI-blue)](https://github.com/dimitris-de/demo-py)
+
 Production-ready FastAPI project with Python 3.11, Docker, dbt, and Airflow.
 
 ## Stack

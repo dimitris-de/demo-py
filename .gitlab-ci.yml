@@ -58,19 +58,21 @@ test:pytest:
   extends: .python-base
   stage: test
   script:
-    - poetry run pytest --cov=src --cov-report=term --cov-report=xml --cov-report=html
-  coverage: '/(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
+    - poetry run pytest --cov=src --cov-report=term --cov-report=xml:coverage.xml --cov-report=html --cov-fail-under=80
+    - echo "Coverage report generated"
+  coverage: '/^TOTAL.+?(\d+\%)$/'
   artifacts:
     reports:
       coverage_report:
         coverage_format: cobertura
         path: coverage.xml
     paths:
+      - coverage.xml
       - htmlcov/
-    expire_in: 1 week
+    expire_in: 30 days
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$CI_COMMIT_BRANCH'
 
 # Build Docker image
 build:docker:

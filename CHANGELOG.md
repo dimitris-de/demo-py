@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- GitLab code coverage reporting for all branches with Cobertura format
 - `scripts/update_changelog.sh` - Interactive changelog entry helper (Bash 3.2 compatible)
 - `scripts/check_changelog.sh` - Automated changelog validation for CI/CD
 - GitLab CI/CD pipeline (5 stages: lint → changelog → test → build → deploy)
