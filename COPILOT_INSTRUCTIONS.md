@@ -237,12 +237,69 @@ poetry run pytest -v
 
 ## GitLab CI/CD
 
-Pipeline stages: `lint` → `test` → `build` → `deploy`
+Pipeline stages: `lint` → `changelog` → `test` → `build` → `deploy`
 
 - **Lint**: black, flake8, mypy
+- **Changelog**: Validates CHANGELOG.md is updated when code changes
 - **Test**: pytest with coverage (fails if <80%)
 - **Build**: Docker image pushed to registry
 - **Deploy**: Manual trigger for staging/production
+
+## Changelog Management
+
+All changes must be documented in `CHANGELOG.md` following [Keep a Changelog](https://keepachangelog.com/) format.
+
+### When Making Changes
+
+**REQUIRED**: Update `CHANGELOG.md` under the `[Unreleased]` section when:
+- Adding new features (`### Added`)
+- Modifying existing functionality (`### Changed`)
+- Deprecating features (`### Deprecated`)
+- Removing features (`### Removed`)
+- Fixing bugs (`### Fixed`)
+- Addressing security issues (`### Security`)
+
+### Example Entry
+
+```markdown
+## [Unreleased]
+
+### Added
+- New Airflow DAG for data synchronization
+- Support for PostgreSQL database connections
+
+### Fixed
+- Memory leak in long-running tasks (#42)
+- Race condition in cache invalidation
+```
+
+### Release Process
+
+When releasing a new version:
+
+```bash
+# 1. Update version in pyproject.toml
+poetry version 0.2.0
+
+# 2. Move [Unreleased] items to new version section in CHANGELOG.md
+## [0.2.0] - 2025-10-25
+
+# 3. Commit changes
+git add pyproject.toml CHANGELOG.md
+git commit -m "Release version 0.2.0"
+
+# 4. Create and push tag
+git tag -a v0.2.0 -m "Release version 0.2.0"
+git push origin main --tags
+```
+
+### GitLab CI Validation
+
+The `changelog:check` job will:
+- ✅ Verify CHANGELOG.md exists
+- ✅ Ensure it's updated when source code changes
+- ✅ Validate proper format (has `[Unreleased]` section)
+- ❌ Fail the pipeline if not updated (on merge requests)
 
 ## Comments Guidelines
 
