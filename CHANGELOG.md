@@ -9,52 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- scripts/README.md - Comprehensive documentation for all utility scripts
-- scripts/update_changelog.sh - Interactive helper for adding changelog entries
-- Initial project setup with FastAPI framework
-- Python 3.11.x support (locked with ~3.11 constraint)
-- Service-based architecture (services/config/operations/utilities)
-- Apache Airflow 2.10.3 for workflow orchestration
-- dbt-core 1.9.x and dbt-snowflake 1.9.x integration
-- Comprehensive test suite with 27 tests achieving 96.39% coverage
+- `scripts/update_changelog.sh` - Interactive changelog entry helper (Bash 3.2 compatible)
+- `scripts/check_changelog.sh` - Automated changelog validation for CI/CD
+- GitLab CI/CD pipeline (5 stages: lint → changelog → test → build → deploy)
+- Comprehensive test suite (27 tests, 96.39% coverage)
 - Airflow DAG unit tests without database dependencies
-- Docker and docker-compose configuration
-- GitLab CI/CD pipeline with 5 stages (lint → changelog → test → build → deploy)
-- Multi-framework template generator system
-- Code quality tools: black, flake8, mypy
-- Comprehensive documentation (README, COPILOT_INSTRUCTIONS)
-- Security review documentation
-- CHANGELOG.md with Keep a Changelog format
-- Automated changelog validation in GitLab CI
-- Utility scripts directory (`scripts/`) for maintainability
-- `scripts/check_changelog.sh` - Standalone changelog validation script with colored output
+- Multi-framework template generator
 
 ### Changed
 
-- Refactored changelog validation from inline GitLab CI script to dedicated bash script
-- Improved GitLab CI configuration readability (now uses external scripts)
-- Enhanced error messages with actionable suggestions and color coding
-
-### Changed
-
-- N/A
-
-### Deprecated
-
-- N/A
-
-### Removed
-
-- N/A
-
-### Fixed
-
-- N/A
-
-### Security
-
-- Environment variables used for sensitive configuration
-- Proper .gitignore to exclude credentials and secrets
+- Refactored changelog validation to standalone script for better maintainability
 
 ## [0.1.0] - 2025-10-20
 
