@@ -1,0 +1,25 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+    environment:
+      - PYTHONPATH=/app
+    command: poetry run python -m uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
+    environment:
+      - PYTHONPATH=/app
+    command: poetry run python -m uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+    stdin_open: true
+    tty: true
