@@ -291,8 +291,9 @@ When contributing to this project:
 1. **Update CHANGELOG.md** - Add your changes under the `[Unreleased]` section
    - Use appropriate category: Added, Changed, Deprecated, Removed, Fixed, Security
    - Be clear and concise about what changed and why
-   
+
 2. **Follow Code Style** - Run quality checks before committing:
+
    ```bash
    poetry run black src/ tests/
    poetry run flake8 src/ tests/
@@ -302,6 +303,7 @@ When contributing to this project:
 3. **Write Tests** - All new features must have tests (80% minimum coverage)
 
 4. **Run All Tests** - Ensure everything passes:
+
    ```bash
    poetry run pytest -v --cov=src
    ```
@@ -327,4 +329,3 @@ See [CHANGELOG.md](CHANGELOG.md) for the full project history.
 - **[COPILOT_INSTRUCTIONS.md](COPILOT_INSTRUCTIONS.md)** - Comprehensive development guidelines
 - **[README.md](README.md)** - This file, project overview
 - **GitLab CI/CD** - Automated pipeline with changelog validation
-

@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- scripts/README.md - Comprehensive documentation for all utility scripts
+- scripts/update_changelog.sh - Interactive helper for adding changelog entries
 - Initial project setup with FastAPI framework
 - Python 3.11.x support (locked with ~3.11 constraint)
 - Service-based architecture (services/config/operations/utilities)

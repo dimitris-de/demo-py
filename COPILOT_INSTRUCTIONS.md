@@ -252,6 +252,7 @@ All changes must be documented in `CHANGELOG.md` following [Keep a Changelog](ht
 ### When Making Changes
 
 **REQUIRED**: Update `CHANGELOG.md` under the `[Unreleased]` section when:
+
 - Adding new features (`### Added`)
 - Modifying existing functionality (`### Changed`)
 - Deprecating features (`### Deprecated`)
@@ -296,6 +297,7 @@ git push origin main --tags
 ### GitLab CI Validation
 
 The `changelog:check` job will:
+
 - ✅ Verify CHANGELOG.md exists
 - ✅ Ensure it's updated when source code changes
 - ✅ Validate proper format (has `[Unreleased]` section)

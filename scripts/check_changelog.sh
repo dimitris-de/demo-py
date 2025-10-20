@@ -51,7 +51,7 @@ print_header() {
 # Check if CHANGELOG.md exists
 check_changelog_exists() {
     print_header "Checking if CHANGELOG.md exists..."
-    
+
     if [ ! -f "CHANGELOG.md" ]; then
         print_error "CHANGELOG.md not found!"
         echo ""
@@ -59,7 +59,7 @@ check_changelog_exists() {
         echo "https://keepachangelog.com/"
         return 1
     fi
-    
+
     print_success "CHANGELOG.md exists"
     return 0
 }
@@ -71,36 +71,36 @@ check_changelog_updated() {
         print_info "Not a merge request, skipping update check"
         return 0
     fi
-    
+
     print_header "Checking if CHANGELOG.md was updated..."
-    
+
     # Get target branch
     local target_branch="${CI_MERGE_REQUEST_TARGET_BRANCH_NAME:-main}"
-    
+
     # Fetch target branch
     git fetch origin "$target_branch" 2>/dev/null || {
         print_warning "Could not fetch target branch, skipping update check"
         return 0
     }
-    
+
     # Get list of changed files
     local changed_files
     changed_files=$(git diff --name-only "origin/$target_branch...HEAD" 2>/dev/null || echo "")
-    
+
     if [ -z "$changed_files" ]; then
         print_warning "Could not determine changed files, skipping update check"
         return 0
     fi
-    
+
     # Check if any source files were changed
     local source_changed
     source_changed=$(echo "$changed_files" | grep -E "^(src/|tests/|pyproject.toml)" || true)
-    
+
     if [ -z "$source_changed" ]; then
         print_info "No source code changes detected, skipping changelog check"
         return 0
     fi
-    
+
     # Check if CHANGELOG.md was also changed
     if ! echo "$changed_files" | grep -q "CHANGELOG.md"; then
         print_error "Source code was modified but CHANGELOG.md was not updated!"
@@ -119,7 +119,7 @@ check_changelog_updated() {
         echo "  - Security: Vulnerability fixes"
         return 1
     fi
-    
+
     print_success "CHANGELOG.md was updated"
     return 0
 }
@@ -127,9 +127,9 @@ check_changelog_updated() {
 # Validate CHANGELOG.md format
 validate_changelog_format() {
     print_header "Validating CHANGELOG.md format..."
-    
+
     local errors=0
-    
+
     # Check for [Unreleased] section
     if ! grep -q "## \[Unreleased\]" CHANGELOG.md; then
         print_error "CHANGELOG.md missing [Unreleased] section!"
@@ -144,17 +144,17 @@ validate_changelog_format() {
         echo ""
         errors=$((errors + 1))
     fi
-    
+
     # Check for Keep a Changelog reference (optional but recommended)
     if ! grep -q "keepachangelog.com" CHANGELOG.md; then
         print_warning "CHANGELOG.md doesn't reference Keep a Changelog format"
         echo "Consider adding: https://keepachangelog.com/"
     fi
-    
+
     if [ $errors -gt 0 ]; then
         return 1
     fi
-    
+
     print_success "CHANGELOG.md format is valid"
     return 0
 }
@@ -166,23 +166,23 @@ main() {
     echo "  CHANGELOG.MD VALIDATION"
     echo "================================================"
     echo ""
-    
+
     local exit_code=0
-    
+
     # Run all checks
     check_changelog_exists || exit_code=1
     echo ""
-    
+
     if [ $exit_code -eq 0 ]; then
         check_changelog_updated || exit_code=1
         echo ""
     fi
-    
+
     if [ $exit_code -eq 0 ]; then
         validate_changelog_format || exit_code=1
         echo ""
     fi
-    
+
     # Final result
     if [ $exit_code -eq 0 ]; then
         echo "================================================"
@@ -197,7 +197,7 @@ main() {
         echo "Please fix the issues above and try again."
         echo ""
     fi
-    
+
     return $exit_code
 }
 
